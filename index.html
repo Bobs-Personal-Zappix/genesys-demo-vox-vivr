@@ -1020,8 +1020,8 @@ updateDots();
 
 function openWhatsApp() {
   // Try to open WhatsApp — works on mobile; falls back to web on desktop
-  var waUrl = 'https://wa.me/?text=Hi+VOX+Cinemas!+I+just+completed+my+Visual+IVR+session.';
-  var waApp = 'whatsapp://send?text=Hi+VOX+Cinemas!+I+just+completed+my+Visual+IVR+session.';
+  var waUrl = 'https://api.whatsapp.com/send/?phone=97144506122';
+  var waApp = 'https://api.whatsapp.com/send/?phone=97144506122';
   // On mobile, attempt app deep link first
   var ua = navigator.userAgent.toLowerCase();
   if (/android|iphone|ipad/.test(ua)) {
