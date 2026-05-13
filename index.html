@@ -715,7 +715,7 @@ body{
       <div class="pay-wrap">
         <div class="pay-section-title">Payment Details</div>
         <div class="booking-chip">
-          <div class="bc-movie">Michael · IMAX · Dubai Mall</div>
+          <div class="bc-movie"><span id="payMovieTitle">Michael</span> · IMAX · Dubai Mall</div>
           <div class="bc-detail">Tue 13 May · 17:45 · Seats C5, C6<br>Popcorn + Combo Deal</div>
         </div>
         <input class="pfield filled" type="email" value="user@email.com" placeholder="Email address" style="cursor:text;-webkit-user-select:text;user-select:text;">
@@ -755,7 +755,7 @@ body{
         <div class="confirm-title">Booking Confirmed!</div>
         <div class="confirm-sub">E-tickets sent to<br>user@email.com</div>
         <div class="confirm-ticket">
-          <div class="trow"><span class="tk">Movie</span><span class="tv">Michael</span></div>
+          <div class="trow"><span class="tk">Movie</span><span class="tv" id="confirmMovieTitle">Michael</span></div>
           <div class="trow"><span class="tk">Format</span><span class="tv">IMAX</span></div>
           <div class="trow"><span class="tk">Date</span><span class="tv">Tue 13 May</span></div>
           <div class="trow"><span class="tk">Time</span><span class="tv">17:45</span></div>
@@ -837,7 +837,7 @@ function updateDots() {
 
 /* ── Movie selection ── */
 const movies = [
-  { title:'Michael', meta:'2h 10m · Action / Adventure · IMAX Available' },
+  { title:'Superman', meta:'2h 10m · Action / Adventure · IMAX Available' },
   { title:'Shōgun', meta:'2h 45m · Drama / Historical · IMAX & Standard' },
   { title:'Michael', meta:'2h 5m · Biographical / Musical · IMAX Available' },
   { title:'Avatar 3', meta:'3h 05m · Sci-Fi / Adventure · IMAX 3D' },
@@ -849,11 +849,17 @@ function selectMovie(idx) {
     if (i === idx) p.classList.add('pop');
     setTimeout(() => p.classList.remove('pop'), 260);
   });
-  document.getElementById('movieTitle').textContent = movies[idx].title;
+  const title = movies[idx].title;
+  document.getElementById('movieTitle').textContent = title;
   document.getElementById('movieMeta').textContent = movies[idx].meta;
   const strip = document.getElementById('movieStrip');
   strip.classList.add('fade-up');
   setTimeout(() => strip.classList.remove('fade-up'), 350);
+  // Update downstream screens with selected movie title
+  const payEl = document.getElementById('payMovieTitle');
+  if (payEl) payEl.textContent = title;
+  const confEl = document.getElementById('confirmMovieTitle');
+  if (confEl) confEl.textContent = title;
 }
 
 /* ── Calendar ── */
